@@ -31,7 +31,13 @@ export function app(): express.Express {
 
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {
-    res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
+    const headers = req.headers;
+    res.render(indexHtml, { req, providers: 
+      [
+        { provide: 'REQUEST_HEADERS', useValue: headers},
+        { provide: APP_BASE_HREF, useValue: req.baseUrl }
+      ] 
+    });
   });
 
   return server;
