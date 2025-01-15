@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/bisa-app-frontend",
+            "outputPath": "dist/BISA-APP-FRONTEND/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -100,6 +100,60 @@
             ],
             "scripts": []
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/BISA-APP-FRONTEND/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "inlineStyleLanguage": "sass"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media"
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "BISA-APP-FRONTEND:build:development",
+              "serverTarget": "BISA-APP-FRONTEND:server:development"
+            },
+            "production": {
+              "browserTarget": "BISA-APP-FRONTEND:build:production",
+              "serverTarget": "BISA-APP-FRONTEND:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "BISA-APP-FRONTEND:build:production",
+              "serverTarget": "BISA-APP-FRONTEND:server:production"
+            },
+            "development": {
+              "browserTarget": "BISA-APP-FRONTEND:build:development",
+              "serverTarget": "BISA-APP-FRONTEND:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
