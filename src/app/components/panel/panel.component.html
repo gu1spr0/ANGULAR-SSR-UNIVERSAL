@@ -1,0 +1,22 @@
+
+  <div class="background">
+    <div class="header"></div>
+    <div class="data-header d-flex flex-column justify-content-center">
+      <div class="row">
+        <div class="title d-flex align-items-center justify-content-center col-md-1">ID:</div>
+        <div class="value d-flex justify-content-center col-md-1">20</div>
+        <div class="title d-flex align-items-center justify-content-center col-md-2">TOKEN:</div>
+        <div class="value d-flex justify-content-center col-md-8">fadsfdasfdsafdsafsda</div>
+      </div>
+    </div>
+    <div class="data-camera">
+      <video #videoElement width="640" height="480" autoplay></video>
+    </div>
+    <div class="data-operation d-flex flex-column">
+      <Button type="button" class="bisa-button">VALIDAR</Button>
+      <Button type="button" class="bisa-button">ESCÁNER</Button>
+      <Button type="button" class="bisa-button">FIRMA</Button>
+      <Button type="button" (click)="OpenCamera()" class="bisa-button">CAMARA</Button>
+      <Button type="button" class="bisa-button">TARJETA</Button>
+    </div>
+  </div>
