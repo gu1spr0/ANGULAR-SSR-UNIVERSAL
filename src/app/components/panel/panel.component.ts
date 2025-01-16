@@ -91,7 +91,7 @@ export class PanelComponent {
           icon: 'success'
         });
 
-        this.image = `ata:image/png;base64,${this.scannerResponse?.data}`
+        this.image = `data:image/png;base64,${this.scannerResponse?.data}`
       }
     });
   }
