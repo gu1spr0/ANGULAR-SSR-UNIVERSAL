@@ -13,15 +13,15 @@
       
       <div class="data-camera d-flex flex-column align-items-center justify-content-center col-md-12">
         <video *ngIf="showCamera" class="camera d-flex" #video autoplay></video>
-        <span *ngIf="!showCamera"><pre>{{validateDataResponse | json}}</pre></span>
+        <ngx-json-viewer *ngIf="!showCamera" class="json-viewer" [json]="validateResponse"></ngx-json-viewer>
       </div>
 
       <div class="data-operation d-flex flex-column">
-        <Button type="button" class="bisa-button" (click)="initValidate()">VALIDAR</Button>
-        <Button type="button" [disabled]="!isEnabled" class="bisa-button">ESCÁNER</Button>
-        <Button type="button" [disabled]="!isEnabled" class="bisa-button">FIRMA</Button>
-        <Button type="button" [disabled]="!isEnabled" (click)="initCamera()" class="bisa-button">CAMARA</Button>
-        <Button type="button" [disabled]="!isEnabled" class="bisa-button">TARJETA</Button>
+        <Button type="button" [disabled]="!this.isEnabled" class="bisa-button" (click)="initValidate()">VALIDAR</Button>
+        <Button type="button" [disabled]="!validateResponse?.status" class="bisa-button">ESCÁNER</Button>
+        <Button type="button" [disabled]="!validateResponse?.status" class="bisa-button">FIRMA</Button>
+        <Button type="button" [disabled]="!validateResponse?.status" (click)="initCamera()" class="bisa-button">CAMARA</Button>
+        <Button type="button" [disabled]="!validateResponse?.status" class="bisa-button">TARJETA</Button>
       </div>
     </div>
   </div>

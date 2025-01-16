@@ -9,6 +9,7 @@ import { BlockUIHttpModule } from 'ng-block-ui/http';
 import { BlockComponent } from './components/block/block.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RequestInterceptor } from './security/request.interceptor';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { RequestInterceptor } from './security/request.interceptor';
     BlockUIModule.forRoot({
       template: BlockComponent
     }),
-    HttpClientModule
+    HttpClientModule,
+    NgxJsonViewerModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

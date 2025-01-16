@@ -15,10 +15,10 @@ export class UserService {
         return this.http.post<ValidateResponse>(VarApis.OP_VALIDATE, null)
             .pipe(
                 map((response: ValidateResponse) => {
-                    if (!response.data) {
+                    if (!response) {
                         throw new Error('El campo data está vacío');
                     }
-                    return response.data;
+                    return response;
                 })
             );
     }

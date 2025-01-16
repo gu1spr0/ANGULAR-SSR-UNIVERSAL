@@ -17,7 +17,7 @@ export class PanelComponent {
   headers: Record<string, string | string[]> | null = null;
   isEnabled: boolean = false;
   showCamera: boolean = true;
-  validateDataResponse: ValidateDataResponse | undefined;
+  validateResponse: ValidateResponse | undefined;
 
   @ViewChild('video', { static: false }) videoElement!: ElementRef<HTMLVideoElement>;
   private stream: MediaStream | null = null;
@@ -52,8 +52,8 @@ export class PanelComponent {
   initValidate() {
     this.showCamera = false;
     this.userService.validateToken().subscribe({
-      next: (response: ValidateDataResponse) => {
-        this.validateDataResponse = response;
+      next: (response: ValidateResponse) => {
+        this.validateResponse = response;
       },
       error: (error) => {
         Swal.fire(error);
