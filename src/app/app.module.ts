@@ -7,6 +7,7 @@ import { PanelComponent } from './components/panel/panel.component';
 import { BlockUIModule } from 'ng-block-ui';
 import { BlockUIHttpModule } from 'ng-block-ui/http';
 import { BlockComponent } from './components/block/block.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { BlockComponent } from './components/block/block.component';
     }),
     BlockUIModule.forRoot({
       template: BlockComponent
-    })
+    }),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
