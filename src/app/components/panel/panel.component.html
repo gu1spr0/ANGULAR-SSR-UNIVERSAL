@@ -14,6 +14,7 @@
       <div class="data-camera d-flex flex-column align-items-center justify-content-center col-md-12">
         <video *ngIf="showCamera" class="camera d-flex" #video autoplay></video>
         <ngx-json-viewer *ngIf="!showCamera" class="json-viewer" [json]="validateResponse"></ngx-json-viewer>
+        <img [src]="image" *ngIf="showImage"/>
       </div>
 
       <div class="data-operation d-flex flex-column">

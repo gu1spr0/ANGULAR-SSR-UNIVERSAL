@@ -1,8 +1,10 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { CredentialData } from 'src/app/interface/credential-data.interface';
+import { ScannerResponse } from 'src/app/interface/scanner/scanner-response.interface';
 import { ValidateDataResponse } from 'src/app/interface/validate-data.interface';
 import { ValidateResponse } from 'src/app/interface/validate-response.interface';
+import { DeviceService } from 'src/app/services/device.service';
 import { HeaderService } from 'src/app/services/haeder.service';
 import { UserService } from 'src/app/services/user.service';
 import { VarLocalStorage } from 'src/app/settings/var.storage';
@@ -18,6 +20,9 @@ export class PanelComponent {
   isEnabled: boolean = false;
   showCamera: boolean = true;
   validateResponse: ValidateResponse | undefined;
+  scannerResponse: ScannerResponse | undefined;
+  image: string = '';
+  showImage: boolean = false;
 
   @ViewChild('video', { static: false }) videoElement!: ElementRef<HTMLVideoElement>;
   private stream: MediaStream | null = null;
@@ -28,7 +33,8 @@ export class PanelComponent {
     token: '-'
   }
   constructor(private headerService: HeaderService,
-              private userService: UserService
+              private userService: UserService,
+              private deviceService: DeviceService
   ) {}
 
   ngOnInit(): void {
@@ -68,7 +74,25 @@ export class PanelComponent {
   }
 
   initScanner() {
+    this.showImage = true;
+    this.isEnabled = false;
+    this.showCamera = false;
+    this.deviceService.scanDocument().subscribe({
+      next: (response: ScannerResponse) => {
+        this.scannerResponse = response;
+      },
+      error: (error) => {
+        Swal.fire(error);
+      },
+      complete: () => {
+        Swal.fire({
+          title: "Escaneo de documento realizado",
+          icon: 'success'
+        });
 
+        this.image = `ata:image/png;base64,${this.scannerResponse?.data}`
+      }
+    });
   }
 
   initSignpad() {
@@ -76,7 +100,7 @@ export class PanelComponent {
   }
 
   async initCamera(): Promise<void> {
-    alert("No permitido");
+    this.showCamera = true;
     if (!this.isEnabled)
       return;
     try {
