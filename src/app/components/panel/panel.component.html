@@ -1,22 +1,27 @@
 
   <div class="background">
     <div class="header"></div>
-    <div class="data-header d-flex flex-column justify-content-center">
-      <div class="row">
-        <div class="title d-flex align-items-center justify-content-center col-md-1">ID:</div>
-        <div class="value d-flex justify-content-center col-md-1">{{ credential.id }}</div>
-        <div class="title d-flex align-items-center justify-content-center col-md-2">TOKEN:</div>
-        <div class="value d-flex justify-content-center col-md-8">{{ credential.token }}</div>
+    <div class="container-body d-flex flex-column justify-content-center">
+      <div class="data-header d-flex flex-column justify-content-center">
+        <div class="d-flex row">
+          <div class="title d-flex align-items-center justify-content-center col-md-1">ID:</div>
+          <div class="value d-flex justify-content-center col-md-1">{{ credential.id }}</div>
+          <div class="title d-flex align-items-center justify-content-center col-md-2">TOKEN:</div>
+          <div class="value d-flex justify-content-center col-md-8">{{ credential.token }}</div>
+        </div>
       </div>
-    </div>
-    <div class="data-camera d-flex flex-column align-items-center">
-      <video class="camera" #video autoplay></video>
-    </div>
-    <div class="data-operation d-flex flex-column">
-      <Button type="button" [disabled]="!isEnabled" class="bisa-button">VALIDAR</Button>
-      <Button type="button" [disabled]="!isEnabled" class="bisa-button">ESCÁNER</Button>
-      <Button type="button" [disabled]="!isEnabled" class="bisa-button">FIRMA</Button>
-      <Button type="button" [disabled]="!isEnabled" (click)="initCamera()" class="bisa-button">CAMARA</Button>
-      <Button type="button" [disabled]="!isEnabled" class="bisa-button">TARJETA</Button>
+      
+      <div class="data-camera d-flex flex-column align-items-center justify-content-center col-md-12">
+        <video *ngIf="showCamera" class="camera d-flex" #video autoplay></video>
+        <span *ngIf="!showCamera"><pre>{{validateDataResponse | json}}</pre></span>
+      </div>
+
+      <div class="data-operation d-flex flex-column">
+        <Button type="button" class="bisa-button" (click)="initValidate()">VALIDAR</Button>
+        <Button type="button" [disabled]="!isEnabled" class="bisa-button">ESCÁNER</Button>
+        <Button type="button" [disabled]="!isEnabled" class="bisa-button">FIRMA</Button>
+        <Button type="button" [disabled]="!isEnabled" (click)="initCamera()" class="bisa-button">CAMARA</Button>
+        <Button type="button" [disabled]="!isEnabled" class="bisa-button">TARJETA</Button>
+      </div>
     </div>
   </div>

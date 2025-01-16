@@ -16,6 +16,8 @@ import Swal from 'sweetalert2';
 export class PanelComponent {
   headers: Record<string, string | string[]> | null = null;
   isEnabled: boolean = false;
+  showCamera: boolean = true;
+  validateDataResponse: ValidateDataResponse | undefined;
 
   @ViewChild('video', { static: false }) videoElement!: ElementRef<HTMLVideoElement>;
   private stream: MediaStream | null = null;
@@ -48,15 +50,19 @@ export class PanelComponent {
   }
 
   initValidate() {
+    this.showCamera = false;
     this.userService.validateToken().subscribe({
       next: (response: ValidateDataResponse) => {
-        Swal.fire(response.agencia);
+        this.validateDataResponse = response;
       },
       error: (error) => {
         Swal.fire(error);
       },
       complete: () => {
-        Swal.fire("Solicitud de datos completado");
+        Swal.fire({
+          title: "Solicitud de datos completado",
+          icon: 'success'
+        });
       }
     });
   }
