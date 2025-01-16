@@ -1,4 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { CredentialData } from 'src/app/interface/credential-data.interface';
 import { HeaderService } from 'src/app/services/haeder.service';
 import Swal from 'sweetalert2';
@@ -11,12 +12,15 @@ import Swal from 'sweetalert2';
 export class PanelComponent {
   headers: Record<string, string | string[]> | null = null;
   isEnabled: boolean = false;
+
+  @ViewChild('video', { static: false }) videoElement!: ElementRef<HTMLVideoElement>;
+  private stream: MediaStream | null = null;
+
   credential: CredentialData = { 
     service: '-',
     id: 0,
     token: '-'
   }
-
   constructor(private headerService: HeaderService) {}
 
   ngOnInit(): void {
@@ -25,18 +29,29 @@ export class PanelComponent {
       Swal.fire("No existen datos del header.");
       return;
     }
-    const bisaCrdential = this.headers['x-bisa-self-service'];
-    if (!bisaCrdential) {
+    let bisaCredential: any = this.headers['x-bisa-self-service'];
+    if (!bisaCredential) {
       Swal.fire("Datos de autenticación no presente en el header.");
       return;
     }
-    
+
+    this.credential = JSON.parse(bisaCredential);
     this.isEnabled = true;
-    const userAgent = this.headers['user-agent']; // Ejemplo de acceso a una cabecera específica
-    console.log('User-Agent:', userAgent);
   }
 
-  OpenCamera() {
-    console.log("Camaria iniciada");
+  async initCamera(): Promise<void> {
+    try {
+      const constraints = {
+        video: true,
+      }
+      this.stream = await navigator.mediaDevices.getUserMedia(constraints);
+
+      if (this.videoElement) {
+        this.videoElement.nativeElement.srcObject = this.stream;
+      }
+    }
+    catch (error) {
+      Swal.fire("Ocurrio un error con la cámara: " + error);
+    }
   }
 }

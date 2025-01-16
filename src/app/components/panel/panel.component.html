@@ -9,14 +9,14 @@
         <div class="value d-flex justify-content-center col-md-8">{{ credential.token }}</div>
       </div>
     </div>
-    <div class="data-camera">
-      <video #videoElement width="640" height="480" autoplay></video>
+    <div class="data-camera d-flex flex-column align-items-center">
+      <video class="camera" #video autoplay></video>
     </div>
     <div class="data-operation d-flex flex-column">
       <Button type="button" [disabled]="!isEnabled" class="bisa-button">VALIDAR</Button>
       <Button type="button" [disabled]="!isEnabled" class="bisa-button">ESCÁNER</Button>
       <Button type="button" [disabled]="!isEnabled" class="bisa-button">FIRMA</Button>
-      <Button type="button" [disabled]="!isEnabled" (click)="OpenCamera()" class="bisa-button">CAMARA</Button>
+      <Button type="button" (click)="openCamera()" class="bisa-button">CAMARA</Button>
       <Button type="button" [disabled]="!isEnabled" class="bisa-button">TARJETA</Button>
     </div>
   </div>
