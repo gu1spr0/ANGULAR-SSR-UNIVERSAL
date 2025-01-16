@@ -57,6 +57,7 @@ export class PanelComponent {
 
   initValidate() {
     this.showCamera = false;
+    this.showImage = false;
     this.userService.validateToken().subscribe({
       next: (response: ValidateResponse) => {
         this.validateResponse = response;
