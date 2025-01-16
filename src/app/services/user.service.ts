@@ -14,11 +14,11 @@ export class UserService {
     validateToken() {
         return this.http.post<ValidateResponse>(VarApis.OP_VALIDATE, null)
             .pipe(
-                tap((response: ValidateResponse) => {
-                    response
-                }),
-                map((response) => {
-                    (response)
+                map((response: ValidateResponse) => {
+                    if (!response.data) {
+                        throw new Error('El campo data está vacío');
+                    }
+                    return response.data;
                 })
             );
     }

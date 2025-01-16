@@ -1,6 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { CredentialData } from 'src/app/interface/credential-data.interface';
+import { ValidateDataResponse } from 'src/app/interface/validate-data.interface';
+import { ValidateResponse } from 'src/app/interface/validate-response.interface';
 import { HeaderService } from 'src/app/services/haeder.service';
 import { UserService } from 'src/app/services/user.service';
 import { VarLocalStorage } from 'src/app/settings/var.storage';
@@ -46,14 +48,17 @@ export class PanelComponent {
   }
 
   initValidate() {
-    this.userService.validateToken().subscribe(
-      (response) => {
-        alert(response);
+    this.userService.validateToken().subscribe({
+      next: (response: ValidateDataResponse) => {
+        Swal.fire(response.agencia);
       },
-      (error) => {
-        alert(error);
+      error: (error) => {
+        Swal.fire(error);
+      },
+      complete: () => {
+        Swal.fire("Solicitud de datos completado");
       }
-    );
+    });
   }
 
   initScanner() {
@@ -65,6 +70,9 @@ export class PanelComponent {
   }
 
   async initCamera(): Promise<void> {
+    alert("No permitido");
+    if (!this.isEnabled)
+      return;
     try {
       const constraints = {
         video: true,
