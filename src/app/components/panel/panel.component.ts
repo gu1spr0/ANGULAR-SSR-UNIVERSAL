@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { CredentialData } from 'src/app/interface/credential-data.interface';
 import { HeaderService } from 'src/app/services/haeder.service';
 import Swal from 'sweetalert2';
 
@@ -10,6 +11,11 @@ import Swal from 'sweetalert2';
 export class PanelComponent {
   headers: Record<string, string | string[]> | null = null;
   isEnabled: boolean = false;
+  credential: CredentialData = { 
+    service: '-',
+    id: 0,
+    token: '-'
+  }
 
   constructor(private headerService: HeaderService) {}
 

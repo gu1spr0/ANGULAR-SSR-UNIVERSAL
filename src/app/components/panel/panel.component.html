@@ -4,9 +4,9 @@
     <div class="data-header d-flex flex-column justify-content-center">
       <div class="row">
         <div class="title d-flex align-items-center justify-content-center col-md-1">ID:</div>
-        <div class="value d-flex justify-content-center col-md-1">20</div>
+        <div class="value d-flex justify-content-center col-md-1">{{ credential.id }}</div>
         <div class="title d-flex align-items-center justify-content-center col-md-2">TOKEN:</div>
-        <div class="value d-flex justify-content-center col-md-8">fadsfdasfdsafdsafsda</div>
+        <div class="value d-flex justify-content-center col-md-8">{{ credential.token }}</div>
       </div>
     </div>
     <div class="data-camera">
@@ -16,7 +16,7 @@
       <Button type="button" [disabled]="!isEnabled" class="bisa-button">VALIDAR</Button>
       <Button type="button" [disabled]="!isEnabled" class="bisa-button">ESCÁNER</Button>
       <Button type="button" [disabled]="!isEnabled" class="bisa-button">FIRMA</Button>
-      <Button type="button" (click)="OpenCamera()" class="bisa-button">CAMARA</Button>
+      <Button type="button" [disabled]="!isEnabled" (click)="OpenCamera()" class="bisa-button">CAMARA</Button>
       <Button type="button" [disabled]="!isEnabled" class="bisa-button">TARJETA</Button>
     </div>
   </div>
