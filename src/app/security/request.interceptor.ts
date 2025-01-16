@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { VarLocalStorage } from '../settings/var.storage';
 
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {
@@ -9,18 +10,18 @@ export class RequestInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Obtén el token desde el servicio de autenticación o localStorage
-    const token = "fdafdafdsa"
+    let id = localStorage.getItem(VarLocalStorage.KIOSK_ID);
+    let token = localStorage.getItem(VarLocalStorage.KIOSK_TOKEN);
 
     // Si el token existe, agrega el header Authorization
-    if (token) {
+    if (id && token) {
       const cloned = req.clone({
         setHeaders: {
-          Authorization: `Bearer ${token}`
+          Authorization: `${id} ${token}`
         }
       });
       return next.handle(cloned);
     }
-    
     // Si no hay token, continúa con la solicitud sin modificarla
     return next.handle(req);
   }

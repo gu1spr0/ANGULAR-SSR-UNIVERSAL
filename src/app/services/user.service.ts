@@ -11,11 +11,8 @@ export class UserService {
     constructor(private http: HttpClient){
     }
 
-    validateToken(kioskId: number, token: string) {
-        const headers = new HttpHeaders({
-            'Authorization': `${kioskId} ${token}`
-        });
-        return this.http.post<ValidateResponse>(VarApis.OP_VALIDATE, null, { headers })
+    validateToken() {
+        return this.http.post<ValidateResponse>(VarApis.OP_VALIDATE, null)
             .pipe(
                 tap((response: ValidateResponse) => {
                     response

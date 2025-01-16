@@ -16,7 +16,7 @@
       <Button type="button" [disabled]="!isEnabled" class="bisa-button">VALIDAR</Button>
       <Button type="button" [disabled]="!isEnabled" class="bisa-button">ESCÁNER</Button>
       <Button type="button" [disabled]="!isEnabled" class="bisa-button">FIRMA</Button>
-      <Button type="button" (click)="openCamera()" class="bisa-button">CAMARA</Button>
+      <Button type="button" [disabled]="!isEnabled" (click)="initCamera()" class="bisa-button">CAMARA</Button>
       <Button type="button" [disabled]="!isEnabled" class="bisa-button">TARJETA</Button>
     </div>
   </div>

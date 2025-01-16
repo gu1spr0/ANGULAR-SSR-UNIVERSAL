@@ -2,6 +2,8 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { CredentialData } from 'src/app/interface/credential-data.interface';
 import { HeaderService } from 'src/app/services/haeder.service';
+import { UserService } from 'src/app/services/user.service';
+import { VarLocalStorage } from 'src/app/settings/var.storage';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -21,7 +23,9 @@ export class PanelComponent {
     id: 0,
     token: '-'
   }
-  constructor(private headerService: HeaderService) {}
+  constructor(private headerService: HeaderService,
+              private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.headers = this.headerService.getHeaders();
@@ -36,7 +40,28 @@ export class PanelComponent {
     }
 
     this.credential = JSON.parse(bisaCredential);
+    localStorage.setItem(VarLocalStorage.KIOSK_ID, this.credential.id.toString());
+    localStorage.setItem(VarLocalStorage.KIOSK_TOKEN, this.credential.token);
     this.isEnabled = true;
+  }
+
+  initValidate() {
+    this.userService.validateToken().subscribe(
+      (response) => {
+        alert(response);
+      },
+      (error) => {
+        alert(error);
+      }
+    );
+  }
+
+  initScanner() {
+
+  }
+
+  initSignpad() {
+
   }
 
   async initCamera(): Promise<void> {
@@ -53,5 +78,9 @@ export class PanelComponent {
     catch (error) {
       Swal.fire("Ocurrio un error con la cámara: " + error);
     }
+  }
+
+  initDispenser() {
+
   }
 }
