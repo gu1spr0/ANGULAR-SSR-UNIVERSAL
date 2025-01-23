@@ -1,6 +1,8 @@
 
   <div class="background">
-    <div class="header"></div>
+    <div class="header d-flex flex-row-reverse align-items-center">
+      <button type="button" (click)="closeView()" class="button-exit">SALIR</button>
+    </div>
     <div class="container-body d-flex flex-column justify-content-center">
       <div class="data-header d-flex flex-column justify-content-center">
         <div class="d-flex row">
@@ -19,7 +21,7 @@
 
       <div class="data-operation d-flex flex-column">
         <Button type="button" [disabled]="!this.isEnabled" class="bisa-button" (click)="initValidate()">VALIDAR</Button>
-        <Button type="button" [disabled]="!validateResponse?.status" class="bisa-button">ESCÁNER</Button>
+        <Button type="button" [disabled]="validateResponse?.status" (click)="initScanner()" class="bisa-button">ESCÁNER</Button>
         <Button type="button" [disabled]="!validateResponse?.status" class="bisa-button">FIRMA</Button>
         <Button type="button" [disabled]="!validateResponse?.status" (click)="initCamera()" class="bisa-button">CAMARA</Button>
         <Button type="button" [disabled]="!validateResponse?.status" class="bisa-button">TARJETA</Button>

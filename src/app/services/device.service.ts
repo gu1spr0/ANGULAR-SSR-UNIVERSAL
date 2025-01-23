@@ -13,7 +13,14 @@ export class DeviceService {
     }
 
     scanDocument() {
-        return this.http.post<ScannerResponse>(VarApis.OP_EXECUTE, "scan,test")
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json' // Indicar que el body es texto plano
+        });
+
+        const data = {
+            key: 'scan,test'
+        }
+        return this.http.post<ScannerResponse>(VarApis.OP_EXECUTE, data, { headers })
             .pipe(
                 map((response: ScannerResponse) => {
                     if (!response) {

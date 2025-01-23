@@ -10,11 +10,11 @@ export class RequestInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Obtén el token desde el servicio de autenticación o localStorage
-    let id = localStorage.getItem(VarLocalStorage.KIOSK_ID);
-    let token = localStorage.getItem(VarLocalStorage.KIOSK_TOKEN);
+    // let id = localStorage.getItem(VarLocalStorage.KIOSK_ID);
+    // let token = localStorage.getItem(VarLocalStorage.KIOSK_TOKEN);
 
-    // let id = 57;
-    // let token = '988664cc-6e32-45da-9367-34e17228518d';
+    let id = 57;
+    let token = '1f367638-8503-4f9e-8d58-ab84e80d519bs';
 
     // Si el token existe, agrega el header Authorization
     if (id && token) {

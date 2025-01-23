@@ -1,4 +1,5 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, ElementRef, Inject, PLATFORM_ID, ViewChild } from '@angular/core';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { CredentialData } from 'src/app/interface/credential-data.interface';
 import { ScannerResponse } from 'src/app/interface/scanner/scanner-response.interface';
@@ -34,7 +35,8 @@ export class PanelComponent {
   }
   constructor(private headerService: HeaderService,
               private userService: UserService,
-              private deviceService: DeviceService
+              private deviceService: DeviceService,
+              @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit(): void {
@@ -121,5 +123,19 @@ export class PanelComponent {
 
   initDispenser() {
 
+  }
+
+  closeView() {
+    if (isPlatformBrowser(this.platformId)) {
+      const reactNativeWebView = (window as any).ReactNativeWebView;
+
+      if (reactNativeWebView) {
+        reactNativeWebView.postMessage('CLOSE');
+      } else {
+        console.warn('ReactNativeWebView no está disponible en el navegador.');
+      }
+    } else {
+      console.warn('El código se está ejecutando en el servidor, no en el navegador.');
+    }
   }
 }
