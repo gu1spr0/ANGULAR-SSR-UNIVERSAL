@@ -14,7 +14,7 @@ export class RequestInterceptor implements HttpInterceptor {
     let token = localStorage.getItem(VarLocalStorage.KIOSK_TOKEN);
 
     //let id = 69;
-    //let token = '94f22303-44bd-4604-b909-5567f1f28983';
+    //let token = '2c489abb-0033-4aeb-9923-d3b70e70ee55';
 
     // Si el token existe, agrega el header Authorization
     if (id && token) {
