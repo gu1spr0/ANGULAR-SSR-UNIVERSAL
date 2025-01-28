@@ -20,11 +20,11 @@
       </div>
 
       <div class="data-operation d-flex flex-column">
-        <Button type="button" (click)="initValidate()" class="bisa-button">VALIDAR</Button>
-        <Button type="button" (click)="initScanner()" class="bisa-button">ESCÁNER</Button>
-        <Button type="button" class="bisa-button">FIRMA</Button>
-        <Button type="button" (click)="initCamera()" class="bisa-button">CAMARA</Button>
-        <Button type="button" class="bisa-button">TARJETA</Button>
+        <Button type="button" [disabled]="isEnabled" (click)="initValidate()" class="bisa-button">VALIDAR</Button>
+        <Button type="button" [disabled]="isEnabled" (click)="initScanner()" class="bisa-button">ESCÁNER</Button>
+        <Button type="button" [disabled]="isEnabled" class="bisa-button">FIRMA</Button>
+        <Button type="button" [disabled]="isEnabled" (click)="initCamera()" class="bisa-button">CAMARA</Button>
+        <Button type="button" [disabled]="isEnabled" class="bisa-button">TARJETA</Button>
       </div>
     </div>
   </div>
