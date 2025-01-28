@@ -125,8 +125,13 @@ export class PanelComponent {
 
   }
 
-  closeView() {
+  async closeView() {
     if (isPlatformBrowser(this.platformId)) {
+      console.log("Enviando mensaje...");
+      await (window as any).CefSharp.BindObjectAsync('message');
+      (window as any).message.Greeting("Israel");
+    }
+    /*if (isPlatformBrowser(this.platformId)) {
       const reactNativeWebView = (window as any).ReactNativeWebView;
 
       if (reactNativeWebView) {
@@ -136,6 +141,6 @@ export class PanelComponent {
       }
     } else {
       console.warn('El código se está ejecutando en el servidor, no en el navegador.');
-    }
+    }*/
   }
 }
